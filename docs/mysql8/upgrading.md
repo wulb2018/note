@@ -1,13 +1,8 @@
 # mysql8与之前版本的差异
 
 
-* [caching_sha2_password作为首选身份验证插件]()
-* [配置变更]()
-* [服务器变更]()
-* [InnoDB的变化]()
-* [SQL变更]()
 
-<a name="caching_sha2_password作为首选身份验证插件">caching_sha2_password作为首选身份验证插件</a>
+## caching_sha2_password作为首选身份验证插件
 
 caching_sha2_password和sha256_password认证插件与原本的mysql_native_password认证插件比价，提供了更加安全的密码加密。并且caching_sha2_password的加密性能比sha256_password更好。因此caching_sha2_password是mysql8的默认的身份验证插件，此更改会影响服务器和libmysqlclient客户端库：
 - 对于mysql服务器default_authentication_plugin系统变量的默认值从mysql_native_password改为caching_sha2_password。
