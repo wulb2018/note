@@ -44,3 +44,17 @@ SET GLOBAL group_replication_recovery_get_public_key=1;
 SET GLOBAL group_replication_recovery_public_key_path ='path to RSA public key path'
 ```
 启动服务器是如果提供密钥则可以使用与RSA公钥相关的选项
+
+## InnoDB增强功能
+
+### 修复自增数值的bug 
+
+自增列每次值更改时，当前最大值都会写入重做日志并保存到每个检查点的引擎专用系统表，这些使当前最大自增计数器值在服务器重新启动后保持不变。
+
+- 在rollback操作后立即重启服务器不再导致重用分配给回滚事务的自增值。
+- 手动修改自增列的值大于当前最大值后将会保留修改的最大值，下一次使用insert时将在修改的值的基础上加一。
+
+### 禁用死锁检测
+
+innodb_deadlock_detect可以使用新的动态变量禁用死锁检测。在高并发系统上，当多线程等待相同锁时，死锁检测会导致速度变慢。有时，禁用死锁检测并在innodb_lock_wait_timeout发生死锁时依靠设置进行事务回滚可能会更有效。
+
