@@ -17,6 +17,7 @@
   	* select优化
   		* [子句优化](/mysql8/optimization/optimizing_select/where.md)
   		* [范围优化](/mysql8/optimization/optimizing_select/range.md)
+  * [explain输出说明](/mysql8/optimization/explain.md)
 
 
 * VMware虚拟机
